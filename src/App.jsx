@@ -17,10 +17,22 @@ function App() {
     event.preventDefault();
     if (!textInput.trim()) return;
 
+    // Define the detailed base prompt
+    const detailedPrompt =
+      "Create a highly detailed, cozy, festive Christmas scene: " +
+      "A warmly lit living room on a snowy evening, with a beautifully decorated Christmas tree, " +
+      "stockings hanging from the fireplace, and presents wrapped in shiny, colorful paper. " +
+      "Include a happy family wearing Christmas sweaters, gathered around, laughing and enjoying hot chocolate. " +
+      "The scene should radiate warmth and joy, capturing the essence of a family Christmas celebration. " +
+      "The atmosphere should be filled with warm colors, a sense of festive cheer, and soft, inviting lighting.";
+
+    // Combine the detailed prompt with the user's input
+    const combinedPrompt = `${textInput} ${detailedPrompt} `;
+
     try {
       const newImageBlob = await hf.textToImage({
         model: "stabilityai/stable-diffusion-2",
-        inputs: textInput,
+        inputs: combinedPrompt,
         parameters: {
           max_tokens: 100,
           temperature: 0.5,
