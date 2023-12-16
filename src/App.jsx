@@ -33,6 +33,7 @@ function App() {
       document.getElementById("dialog-modal").close();
     } catch (error) {
       console.error("Error generating image:", error);
+      setImageSrc("Error generating image");
     }
   };
 
