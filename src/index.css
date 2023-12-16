@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Roboto:wght@400&display=swap");
+
+:root {
+  --radius: 3px;
+  --main-color: #5d3fd3;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-image: url("./assets/xmas-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  background-color: rgb(153, 153, 246);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-color);
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 3px 3px 10px 1px #666;
+  border-radius: var(--radius);
+  position: relative;
+  max-width: 512px;
+}
+
+section {
+  flex: 1 1 50%;
+  max-width: 256px;
+  text-align: center;
+  background-color: white;
+  padding: 1em;
+}
+
+.right-col {
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  font-family: "Courgette";
+}
+
+.left-col {
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+}
+
+img {
+  border-radius: var(--radius);
+  max-width: 100%;
+  height: auto;
+}
+
+dialog {
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 10px 1px #666;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  width: 90%;
+  max-width: 300px;
+}
+
+.form-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-family: "Roboto";
+  display: block;
+  text-align: center;
+  margin: 0 auto 1em auto;
+  padding: 0 0.2em;
+  font-size: 140%;
+}
+
+textarea {
+  resize: none;
+  border: 1px solid #999;
+  border-radius: var(--radius);
+  height: 3em;
+  padding: 0.3em;
+  width: 100%;
+  margin: 0 auto;
+}
+
+button {
+  background-color: var(--main-color);
+  border: none;
+  color: white;
+  border-radius: var(--radius);
+  padding: 0.6em;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 1em;
+}
+
+.btn-send {
+  width: 25px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-inner {
+    flex-direction: column;
+  }
+
+  img {
+    width: 90%;
+    max-width: none;
+  }
+
+  section {
+    width: 100%;
+    max-width: none;
+  }
+}
