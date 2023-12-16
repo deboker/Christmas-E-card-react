@@ -32,6 +32,8 @@ main {
   border-radius: var(--radius);
   position: relative;
   max-width: 512px;
+  width: 100%;
+  padding: 0;
 }
 
 section {
@@ -39,7 +41,6 @@ section {
   max-width: 256px;
   text-align: center;
   background-color: white;
-  padding: 2em;
 }
 
 .right-col {
@@ -68,7 +69,7 @@ dialog {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 2em;
-  width: 90%;
+  width: 80%;
   max-width: 300px;
 }
 

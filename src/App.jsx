@@ -6,6 +6,7 @@ import { HfInference } from "@huggingface/inference";
 function App() {
   const [textInput, setTextInput] = useState("");
   const [imageSrc, setImageSrc] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const hf = new HfInference(import.meta.env.VITE_HF_TOKEN); // Assuming you're using Create React App
 
   useEffect(() => {
@@ -16,6 +17,8 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!textInput.trim()) return;
+
+    setIsLoading(true);
 
     // Define the detailed base prompt
     const detailedPrompt =
@@ -46,6 +49,8 @@ function App() {
       console.error("Error generating image:", error);
       setImageSrc("Error generating image");
     }
+
+    setIsLoading(false);
   };
 
   const blobToBase64 = (blob) => {
@@ -60,7 +65,11 @@ function App() {
   return (
     <main>
       <section className="left-col">
-        <img src={imageSrc ? imageSrc : defaultImage} alt="Generated" />
+        {isLoading ? (
+          <div>Loading your image...</div>
+        ) : (
+          <img src={imageSrc ? imageSrc : defaultImage} alt="Generated" />
+        )}
       </section>
       <section className="right-col">
         <h1>Merry Christmas!!</h1>
@@ -69,7 +78,11 @@ function App() {
       </section>
       <dialog id="dialog-modal">
         <form onSubmit={handleSubmit}>
-          <label>Describe a Christmassy image for your e-card 🎄</label>
+          <label>
+            {isLoading
+              ? "Loading your image..."
+              : "Describe a Christmassy image for your e-card 🎄"}
+          </label>
           <div className="form-inner">
             <textarea
               placeholder="A santa winter scene..."
