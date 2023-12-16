@@ -39,14 +39,13 @@ section {
   max-width: 256px;
   text-align: center;
   background-color: white;
-  padding: 1em;
+  padding: 2em;
 }
 
 .right-col {
   border-top-right-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
   font-family: "Courgette";
-  padding: 30px;
 }
 
 .left-col {

@@ -22,7 +22,6 @@ function App() {
       "Create a highly detailed, cozy, festive Christmas scene: " +
       "A warmly lit living room on a snowy evening, with a beautifully decorated Christmas tree, " +
       "stockings hanging from the fireplace, and presents wrapped in shiny, colorful paper. " +
-      "Include a happy family wearing Christmas sweaters, gathered around, laughing and enjoying hot chocolate. " +
       "The scene should radiate warmth and joy, capturing the essence of a family Christmas celebration. " +
       "The atmosphere should be filled with warm colors, a sense of festive cheer, and soft, inviting lighting.";
 
