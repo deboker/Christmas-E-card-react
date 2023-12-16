@@ -26,6 +26,7 @@ body {
 
 main {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   box-shadow: 3px 3px 10px 1px #666;
   border-radius: var(--radius);
@@ -45,6 +46,7 @@ section {
   border-top-right-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
   font-family: "Courgette";
+  padding: 30px;
 }
 
 .left-col {

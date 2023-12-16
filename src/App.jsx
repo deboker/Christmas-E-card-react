@@ -73,7 +73,7 @@ function App() {
           <label>Describe a Christmassy image for your e-card 🎄</label>
           <div className="form-inner">
             <textarea
-              placeholder="A winter scene..."
+              placeholder="A santa winter scene..."
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
             />
