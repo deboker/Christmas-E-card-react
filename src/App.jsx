@@ -85,7 +85,7 @@ function App() {
           </label>
           <div className="form-inner">
             <textarea
-              placeholder="You are in cozy livingroom with fireplace, christmass tree and..."
+              placeholder="You are in cozy living room with fireplace, christmas tree and..."
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
             />
