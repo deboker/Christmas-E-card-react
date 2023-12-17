@@ -16,7 +16,7 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!textInput.trim()) return;
+    if (!textInput.trim() || isLoading) return;
 
     setIsLoading(true);
 
@@ -37,7 +37,7 @@ function App() {
         inputs: combinedPrompt,
         parameters: {
           max_tokens: 100,
-          temperature: 0.5,
+          temperature: 0.7,
         },
       });
 
@@ -74,7 +74,7 @@ function App() {
       <section className="right-col">
         <h1>Merry Christmas!!</h1>
         <h2>And all the best for 2024</h2>
-        <p>Love Andrej</p>
+        <p>Love Andrey</p>
       </section>
       <dialog id="dialog-modal">
         <form onSubmit={handleSubmit}>
@@ -85,11 +85,11 @@ function App() {
           </label>
           <div className="form-inner">
             <textarea
-              placeholder="A santa winter scene..."
+              placeholder="You are in cozy livingroom with fireplace, christmass tree and..."
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
             />
-            <button type="submit">
+            <button type="submit" disabled={isLoading}>
               <img src={SendLogo} className="btn-send" alt="Send" />
             </button>
           </div>
