@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import defaultImage from "./assets/placeholder-image.png";
 import SendLogo from "./assets/send.svg";
 import { HfInference } from "@huggingface/inference";
+import { blobToBase64 } from "./components/utilis";
+
+function capitalizeFirstLetter(string) {
+  if (!string) return string;
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function App() {
   const [textInput, setTextInput] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [altText, setAltText] = useState("");
+
   const hf = new HfInference(import.meta.env.VITE_HF_TOKEN); // Assuming you're using Create React App
 
   useEffect(() => {
@@ -22,14 +30,10 @@ function App() {
 
     // Define the detailed base prompt
     const detailedPrompt =
-      "Create a highly detailed, cozy, festive Christmas scene: " +
-      "A warmly lit living room on a snowy evening, with a beautifully decorated Christmas tree, " +
-      "stockings hanging from the fireplace, and presents wrapped in shiny, colorful paper. " +
-      "The scene should radiate warmth and joy, capturing the essence of a family Christmas celebration. " +
-      "The atmosphere should be filled with warm colors, a sense of festive cheer, and soft, inviting lighting.";
+      "cozy living room with fireplace, christmas tree and";
 
     // Combine the detailed prompt with the user's input
-    const combinedPrompt = `${textInput} ${detailedPrompt} `;
+    const combinedPrompt = `${detailedPrompt} ${textInput}`;
 
     try {
       const newImageBlob = await hf.textToImage({
@@ -45,21 +49,24 @@ function App() {
       setImageSrc(newImageBase64);
 
       document.getElementById("dialog-modal").close();
+
+      const response = await fetch(newImageBase64);
+      if (!response.ok) {
+        throw new Error(`Error fetching image: ${response.statusText}`);
+      }
+      const imageData = await response.blob();
+      const altTextResponse = await hf.imageToText({
+        data: imageData,
+        model: "Salesforce/blip-image-captioning-base",
+      });
+
+      setAltText(capitalizeFirstLetter(altTextResponse.generated_text));
     } catch (error) {
-      console.error("Error generating image:", error);
-      setImageSrc("Error generating image");
+      console.error("Error generating alt text:", error);
+      setImageSrc(defaultImage);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
-  };
-
-  const blobToBase64 = (blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
   };
 
   return (
@@ -68,7 +75,10 @@ function App() {
         {isLoading ? (
           <div>Loading your image...</div>
         ) : (
-          <img src={imageSrc ? imageSrc : defaultImage} alt="Generated" />
+          <div>
+            <img src={imageSrc ? imageSrc : defaultImage} alt={altText} />
+            <p className="image-description">{altText}</p>
+          </div>
         )}
       </section>
       <section className="right-col">

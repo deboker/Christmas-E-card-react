@@ -60,6 +60,11 @@ img {
   height: auto;
 }
 
+.image-description {
+  font-size: 0.4rem;
+  font-family: "Courgette";
+}
+
 dialog {
   border: none;
   border-radius: var(--radius);
